@@ -4,7 +4,10 @@
    - 提取對話中的 {旅遊地點}、{出發時間}、{住宿類型}、{特殊行程}。若有缺失，主動詢問。
 
 2. Action (工具調用)
-   - 依據提取到的條件，參閱 TOOLS.md 的適用時機，呼叫對應的氣象與電壓連接器獲取實際資料。
+   - 依據提取到的條件：
+     - 若出發日在 14 天內：國內呼叫 `get_taiwan_weather`；國外將地點轉為英文，呼叫 `get_global_weather`。
+     - 若出發日超過 14 天：將國家轉為英文，呼叫 `get_historical_climate`。
+     - 若為跨國旅遊：將國家轉為英文，呼叫 `get_plug_voltage`。
 
 3. Match (知識對照)
    - 讀取 `references/packing-reference.md`。
